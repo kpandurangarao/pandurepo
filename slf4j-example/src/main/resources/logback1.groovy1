@@ -1,0 +1,14 @@
+import ch.qos.logback.classic.encoder.PatternLayoutEncoder
+import ch.qos.logback.core.ConsoleAppender
+
+import static ch.qos.logback.classic.Level.DEBUG
+import static ch.qos.logback.classic.Level.INFO
+
+appender("STDOUT", ConsoleAppender) {
+  encoder(PatternLayoutEncoder) {
+    pattern = "%d{ISO8601} %-5p [%C:%L] %m [REQ:%X{request}, CUST:%X{customer}]%n"
+  }
+}
+
+logger("com.lordofthejars.foo", INFO)
+root(DEBUG, ["STDOUT"])

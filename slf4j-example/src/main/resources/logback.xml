@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="120 seconds">
+
+	<!-- <appender name="splunkrest" class="com.splunk.logging.logback.appender.SplunkRestAppender"> 
+		<port>10516</port> <host>10.246.3.125</host> <delivery>stream</delivery> 
+		<user>jmathai</user> <metaSourcetype>testing</metaSourcetype> <pass>splunk</pass> 
+		<maxQueueSize>5MB</maxQueueSize> <dropEventsOnQueueFull>false</dropEventsOnQueueFull> 
+		<metaSource>rest</metaSource> <metaIndex>main</metaIndex> <layout class="ch.qos.logback.classic.PatternLayout"> 
+		<pattern>%d{ISO8601} %-5p [%C:%L] %m [REQ:%X{request},CUST:%X{customer}]%n 
+		</pattern> </layout> </appender> -->
+
+	<appender name="splunkrawtcp" class="com.splunk.logging.logback.appender.SplunkRawTCPAppender">
+		<port>1981</port>
+		<host>kpandurangarao</host>
+		<maxQueueSize>5MB</maxQueueSize>
+		<dropEventsOnQueueFull>false</dropEventsOnQueueFull>
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<pattern>%d{ISO8601} %-5p [%C:%L] %m [REQ:%X{request}, CUST:%X{customer}]%n</pattern>
+			<!-- optionally you can enrich the messages with formatting tokens from 
+				the logging framework <pattern>%d %m%n</pattern> <pattern>%m loglevel="%p"%n</pattern> -->
+		</layout>
+	</appender>
+
+	<appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>%d{ISO8601} %-5p [%C:%L] %m [REQ:%X{request},
+				CUST:%X{customer}]%n </pattern>
+		</encoder>
+	</appender>
+
+	<!-- <appender name="ROLLING" class="ch.qos.logback.core.rolling.RollingFileAppender"> 
+		<file>D:/slf4j-example/log/commonLog.log</file> <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy"> 
+		<fileNamePattern>D:/slf4j-example/log/commonLog.%i.log </fileNamePattern> 
+		<minIndex>1</minIndex> <maxIndex>5</maxIndex> </rollingPolicy> <triggeringPolicy 
+		class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy"> <maxFileSize>2KB</maxFileSize> 
+		</triggeringPolicy> <encoder> <pattern>>%d %5p | %t | %-5p | %xEx{2} | %C:%L 
+		| %m %n</pattern> </encoder> </appender> -->
+
+	<appender name="FILE" class="ch.qos.logback.core.FileAppender">
+		<file>./log/sample_log.log</file>
+		<append>true</append>
+		<encoder>
+			<pattern>%d{ISO8601} %-5p [%C:%L] %m
+				[REQ:%X{request},CUST:%X{customer}]%n</pattern>
+		</encoder>
+	</appender>
+
+	<logger name="org.hibernate" level="warn" />
+	<logger name="org.springframework" level="warn" />
+	<logger name="com.prokarma" level="trace" />
+
+	<root level="DEBUG">
+		<appender-ref ref="CONSOLE" />
+		<appender-ref ref="splunkrawtcp" />
+	</root>
+
+</configuration>  
+                  
