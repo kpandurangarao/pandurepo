@@ -9,6 +9,7 @@ public class OracleJDBCTest {
 	public static void main(String[] argv) {
 
 		System.out.println("-------- Oracle JDBC Connection Testing ------");
+		System.out.println("Testing jdbc ......jenkins docker...........");
 
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
