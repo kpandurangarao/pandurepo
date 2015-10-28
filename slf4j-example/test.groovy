@@ -7,6 +7,6 @@ freeStyleJob('example') {
         githubPush()
     }
     steps {
-        gradle('clean build')
+        maven('clean install')
     }
 }
