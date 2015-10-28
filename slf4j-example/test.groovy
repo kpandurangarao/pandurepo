@@ -1,7 +1,7 @@
 freeStyleJob('example') {
     logRotator(-1, 10)
     scm {
-        github('kpandurangarao/pandurepo/tree/master/TestRestExample', 'master')
+        github('kpandurangarao/restrepo', 'master')
     }
     triggers {
         githubPush()
